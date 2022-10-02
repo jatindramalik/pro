@@ -1,0 +1,6 @@
+package com.keybank.accountinfo.model;
+
+
+public class AccontInfoDaoResponse {
+    
+}

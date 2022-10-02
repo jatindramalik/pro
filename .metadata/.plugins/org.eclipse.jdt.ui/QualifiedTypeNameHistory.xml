@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+    <fullyQualifiedTypeName name="java.util.concurrent.Callable"/>
+    <fullyQualifiedTypeName name="com.keybank.accountinfo.model.TaskResult"/>
+    <fullyQualifiedTypeName name="com.keybank.accountinfo.model.AccountInfoDaoRequest"/>
+    <fullyQualifiedTypeName name="com.keybank.accountinfo.dao.IAccountsAdjustPendingPtsDao"/>
+</qualifiedTypeNameHistroy>
