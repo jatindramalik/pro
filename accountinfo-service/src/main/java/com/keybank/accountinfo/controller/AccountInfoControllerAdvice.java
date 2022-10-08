@@ -16,61 +16,52 @@ import com.keybank.accountinfo.model.StatusBlock;
 
 /**
  * @author jatin, 23-Sep-2022
- * Description:
+ *         Description:
  */
 @ControllerAdvice
 public class AccountInfoControllerAdvice {
 
+    AccountInfoResponse accountInfoResponse = null;
+
     @ExceptionHandler(value = AccountsRequestInvalidException.class)
     @ResponseBody
-    public AccountInfoResponse handleRequestData(AccountsRequestInvalidException exception){
-        AccountInfoResponse accountInfoResponse = new AccountInfoResponse();
-        StatusBlock statusBlock = new StatusBlock();
-        statusBlock.setRespCode(exception.getRespCode());
-        statusBlock.setRespMsg(exception.getRespMsg());
+    public AccountInfoResponse handleRequestData(AccountsRequestInvalidException exception) {
 
-        accountInfoResponse.setStatusBlock(statusBlock);
-        
-        return accountInfoResponse;
+        return buildErrorResp(exception.getRespCode(), exception.getRespMsg());
     }
 
     @ExceptionHandler(value = BusinessException.class)
     @ResponseBody
-    public AccountInfoResponse handleDataErrors(BusinessException exception){
-        AccountInfoResponse accountInfoResponse = new AccountInfoResponse();
-        StatusBlock statusBlock = new StatusBlock();
-        statusBlock.setRespCode(exception.getRespCode());
-        statusBlock.setRespMsg(exception.getRespMsg());
+    public AccountInfoResponse handleDataErrors(BusinessException exception) {
 
-        accountInfoResponse.setStatusBlock(statusBlock);
-        
-        return accountInfoResponse;
+        return buildErrorResp(exception.getRespCode(), exception.getRespMsg());
+
     }
 
     @ExceptionHandler(value = SystemException.class)
     @ResponseBody
-    public AccountInfoResponse handleSystemErrors(SystemException exception){
-        AccountInfoResponse accountInfoResponse = new AccountInfoResponse();
-        StatusBlock statusBlock = new StatusBlock();
-        statusBlock.setRespCode(exception.getRespCode());
-        statusBlock.setRespMsg(exception.getRespMsg());
+    public AccountInfoResponse handleSystemErrors(SystemException exception) {
 
-        accountInfoResponse.setStatusBlock(statusBlock);
-        
-        return accountInfoResponse;
+        return buildErrorResp(exception.getRespCode(), exception.getRespMsg());
+
     }
 
     @ExceptionHandler(value = Exception.class)
     @ResponseBody
-    public AccountInfoResponse handleGenricErrors(Exception exception){
+    public AccountInfoResponse handleGenricErrors(Exception exception) {
+
+        return buildErrorResp("acct777", "Unknown error from database");
+        ;
+    }
+
+    private AccountInfoResponse buildErrorResp(String respCode, String respMsg) {
         AccountInfoResponse accountInfoResponse = new AccountInfoResponse();
-        
+
         StatusBlock statusBlock = new StatusBlock();
-        statusBlock.setRespCode("acct777");
-        statusBlock.setRespMsg("Unknown error from database");
+        statusBlock.setRespCode(respCode);
+        statusBlock.setRespMsg(respMsg);
 
         accountInfoResponse.setStatusBlock(statusBlock);
-        
         return accountInfoResponse;
     }
 
