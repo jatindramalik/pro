@@ -5,6 +5,8 @@
 package com.keybank.accountinfo.dao;
 
 
+import com.keybank.accountinfo.exception.BusinessException;
+import com.keybank.accountinfo.exception.SystemException;
 import com.keybank.accountinfo.model.AccountInfoAvailablePtsDaoResp;
 import com.keybank.accountinfo.model.AccountInfoDaoRequest;
 
@@ -14,6 +16,6 @@ import com.keybank.accountinfo.model.AccountInfoDaoRequest;
  */
 public interface IAccounstAvailablePtsDao {
 
-    AccountInfoAvailablePtsDaoResp getAvailableRewardPts(AccountInfoDaoRequest daoRequest);
+    AccountInfoAvailablePtsDaoResp getAvailableRewardPts(AccountInfoDaoRequest daoRequest) throws BusinessException, SystemException;
 
 }

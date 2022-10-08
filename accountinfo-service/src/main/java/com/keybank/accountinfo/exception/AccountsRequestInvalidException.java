@@ -8,6 +8,22 @@ package com.keybank.accountinfo.exception;
  * @author jatin, 23-Sep-2022
  * Description:
  */
-public class AccountsRequestInvalidException {
+public class AccountsRequestInvalidException extends Exception {
+
+    private String respCode;
+    private String respMsg;
+
+    public AccountsRequestInvalidException(String respCode, String respMsg){
+        this.respCode = respCode;
+        this.respMsg = respMsg;
+    }
+
+    public String getRespCode() {
+        return respCode;
+    }
+
+    public String getRespMsg() {
+        return respMsg;
+    }
 
 }

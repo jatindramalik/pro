@@ -6,6 +6,7 @@ package com.keybank.accountinfo.validator;
 
 import org.springframework.stereotype.Component;
 
+import com.keybank.accountinfo.exception.AccountsRequestInvalidException;
 import com.keybank.accountinfo.model.AccountInfoRequest;
 
 /**
@@ -15,12 +16,11 @@ import com.keybank.accountinfo.model.AccountInfoRequest;
 @Component
 public class AccountsInfoServiceRequestValidator {
 
-    public void validateRequest(AccountInfoRequest request) {
+    public void validateRequest(AccountInfoRequest request) throws AccountsRequestInvalidException {
 
-        /* 
-         * TODO : validate the request, if the request element are invalid the throw the user defined exception
-         * else it does not return anything
-         */
+       if(request == null){
+        throw new AccountsRequestInvalidException("acct001", "request object is null");
+       }
     }
 
 }

@@ -6,6 +6,8 @@ package com.keybank.accountinfo.service;
 
 import java.util.concurrent.ExecutionException;
 
+import com.keybank.accountinfo.exception.BusinessException;
+import com.keybank.accountinfo.exception.SystemException;
 import com.keybank.accountinfo.model.AccountInfoRequest;
 import com.keybank.accountinfo.model.AccountInfoResponse;
 
@@ -15,6 +17,6 @@ import com.keybank.accountinfo.model.AccountInfoResponse;
  */
 public interface IAccountInfoService {
 
-    AccountInfoResponse getRewardSummary(AccountInfoRequest accountInfoReq) throws InterruptedException, ExecutionException;
+    AccountInfoResponse getRewardSummary(AccountInfoRequest accountInfoReq) throws InterruptedException, ExecutionException, SystemException, BusinessException;
 
 }

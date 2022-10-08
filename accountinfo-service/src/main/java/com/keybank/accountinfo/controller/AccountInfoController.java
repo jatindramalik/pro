@@ -5,6 +5,8 @@
 package com.keybank.accountinfo.controller;
 
 
+import java.util.concurrent.ExecutionException;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-
+import com.keybank.accountinfo.exception.AccountsRequestInvalidException;
 import com.keybank.accountinfo.model.AccountInfoRequest;
 import com.keybank.accountinfo.model.AccountInfoResponse;
 import com.keybank.accountinfo.model.StatusBlock;
@@ -33,22 +35,31 @@ public class AccountInfoController {
     IAccountInfoService accountInfoService;
 
     @GetMapping("/rewardssummary/{cardnum}/{cvv}/{nameoncard}/{expdate}")
-    public AccountInfoResponse getRewardSummary(@PathVariable("cardnum")String cardnum,
+    public AccountInfoResponse getRewardSummary(@PathVariable("cardnum")String cardNum,
                                                 @PathVariable("cvv")String cvv,
                                                 @PathVariable("nameoncard")String nameOnCard,
-                                                @PathVariable("expdate")String expdate,
+                                                @PathVariable("expdate")String expDate,
                                                 @RequestParam("typeOfRewards")String typeOfRewards,
                                                 @RequestHeader("clientId")String clientId,
                                                 @RequestHeader("channelId")String channelId,
                                                 @RequestHeader("reqId")String reqId,
                                                 @RequestHeader("msgTs")String msgTs
-                                                ) throws InterruptedException{
+                                                ) throws InterruptedException, AccountsRequestInvalidException, ExecutionException{
                                                  
         AccountInfoResponse accountInfoResponse = null;
 
-        try {
+       
         //1.*Get the request from service
         AccountInfoRequest request = new AccountInfoRequest();
+        request.setCardNum(cardNum);
+        request.setCvv(cvv);
+        request.setNameOnCard(nameOnCard);
+        request.setExpDate(expDate);
+        request.setClienId(clientId);
+        request.setChannelId(channelId);
+        request.setReqId(reqId);
+        request.setMsgTs(msgTs);
+        request.setTypeOfRewards(typeOfRewards);
 
         //2.validate the request, if the request is invalid then throw userdefined exception eles proceed to service layer
         reqValidator.validateRequest(request);
@@ -61,10 +72,7 @@ public class AccountInfoController {
        accountInfoResponse.setStatusBlock(statusBlock);
         //5.prepare the controller response and send to consumer/client
         
-            
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        
                                                     
         return accountInfoResponse;
     }

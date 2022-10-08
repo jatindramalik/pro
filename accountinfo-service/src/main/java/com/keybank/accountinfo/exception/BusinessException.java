@@ -8,6 +8,24 @@ package com.keybank.accountinfo.exception;
  * @author jatin, 23-Sep-2022
  * Description:
  */
-public class BusinessException {
+public class BusinessException extends Exception {
+
+    private String respCode;
+    private String respMsg;
+
+    public BusinessException(String respCode, String respMsg){
+        this.respCode = respCode;
+        this.respMsg = respMsg;
+    }
+
+    public String getRespCode() {
+        return respCode;
+    }
+
+    public String getRespMsg() {
+        return respMsg;
+    }
+
+    
 
 }

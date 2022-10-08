@@ -17,6 +17,8 @@ import org.springframework.stereotype.Component;
 import com.keybank.accountinfo.dao.IAccounstAvailablePtsDao;
 import com.keybank.accountinfo.dao.IAccountsAdjustPendingPtsDao;
 import com.keybank.accountinfo.dao.IAccountsForfietedPtsDao;
+import com.keybank.accountinfo.exception.BusinessException;
+import com.keybank.accountinfo.exception.SystemException;
 import com.keybank.accountinfo.model.AccountInfoAdjustPendingPtDaoResp;
 import com.keybank.accountinfo.model.AccountInfoAvailablePtsDaoResp;
 import com.keybank.accountinfo.model.AccountInfoDaoRequest;
@@ -55,7 +57,7 @@ public class AccountInfoServiceImpl implements IAccountInfoService {
     AccountsForfietedPtsTask accountsForfietedPtsTask;
 
     @Override
-    public AccountInfoResponse getRewardSummary(AccountInfoRequest accountInfoReq) throws InterruptedException, ExecutionException {
+    public AccountInfoResponse getRewardSummary(AccountInfoRequest accountInfoReq) throws InterruptedException, ExecutionException, SystemException, BusinessException {
         
         AccountInfoResponse accountInfoResp = new AccountInfoResponse();
 

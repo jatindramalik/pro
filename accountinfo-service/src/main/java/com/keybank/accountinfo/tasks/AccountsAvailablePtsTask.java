@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.keybank.accountinfo.dao.IAccounstAvailablePtsDao;
+import com.keybank.accountinfo.exception.BusinessException;
+import com.keybank.accountinfo.exception.SystemException;
 import com.keybank.accountinfo.model.AccountInfoAvailablePtsDaoResp;
 import com.keybank.accountinfo.model.AccountInfoDaoRequest;
 import com.keybank.accountinfo.model.TaskResult;
@@ -32,7 +34,7 @@ public class AccountsAvailablePtsTask implements Callable<TaskResult> {
 
 
     @Override
-    public TaskResult call() throws Exception {
+    public TaskResult call() throws BusinessException, SystemException   {
 		System.out.println("Entered into AccountsAvailablePtsTask");
 
 
